@@ -1,4 +1,4 @@
-"""Pytest configuration and fixtures."""
+"""Pytest configuration and fixtures for data extraction testing."""
 
 import json
 import os
@@ -85,14 +85,9 @@ def temp_questions_file(sample_questions):
 
 
 @pytest.fixture
-def mock_together_client():
-    """Mock Together AI client."""
-    mock_client = Mock()
-    mock_response = Mock()
-    mock_response.choices = [Mock()]
-    mock_response.choices[0].message.content = "Mock response"
-    mock_client.chat.completions.create.return_value = mock_response
-    return mock_client
+def mock_client():
+    """Mock client for testing."""
+    return Mock()
 
 
 @pytest.fixture
@@ -129,23 +124,94 @@ def sample_results():
             "industry": "healthcare",
             "prompt_idx": 1,
             "question": "What are the benefits of telemedicine?",
-            "model_1_response": "Telemedicine offers remote healthcare access...",
-            "model_2_response": "Telemedicine provides virtual medical consultations...",
-            "model_1_evaluation": "Good response covering key benefits...",
-            "model_2_evaluation": "Comprehensive overview of telemedicine...",
-            "model_1_scores": {
-                "accuracy": 4.0,
-                "completeness": 3.5,
-                "clarity": 4.2,
-                "depth": 3.8,
-                "overall": 3.9,
+            "model_1": {
+                "response": "Telemedicine offers remote healthcare access...",
+                "evaluation": "Good response covering key benefits...",
+                "scores": {
+                    "accuracy": 4.0,
+                    "completeness": 3.5,
+                    "clarity": 4.2,
+                    "depth": 3.8,
+                    "overall": 3.9,
+                },
             },
-            "model_2_scores": {
-                "accuracy": 3.8,
-                "completeness": 4.1,
-                "clarity": 3.9,
-                "depth": 4.0,
-                "overall": 4.0,
+            "model_2": {
+                "response": "Telemedicine provides virtual medical consultations...",
+                "evaluation": "Comprehensive overview of telemedicine...",
+                "scores": {
+                    "accuracy": 3.8,
+                    "completeness": 4.1,
+                    "clarity": 3.9,
+                    "depth": 4.0,
+                    "overall": 4.0,
+                },
             },
         }
     ]
+
+
+@pytest.fixture
+def malformed_evaluation_text():
+    """Provide malformed evaluation text for testing."""
+    return """
+    This is completely malformed text with no scores at all.
+    It doesn't contain any of the expected patterns.
+    Just random text that should result in default scores.
+    """
+
+
+@pytest.fixture
+def partial_evaluation_text():
+    """Provide evaluation text with only some scores for testing."""
+    return """
+    Accuracy: 4.5/5
+    Clarity: 4.2/5
+    Overall Quality: 4.1/5
+    """
+
+
+@pytest.fixture
+def invalid_scores():
+    """Provide invalid scores for testing."""
+    return {
+        "accuracy": "invalid",
+        "completeness": 3.8,
+        "clarity": 4.2,
+        "depth": 3.9,
+        "overall": 4.1,
+    }
+
+
+@pytest.fixture
+def out_of_range_scores():
+    """Provide out-of-range scores for testing."""
+    return {
+        "accuracy": 6.0,  # Out of range
+        "completeness": 3.8,
+        "clarity": 4.2,
+        "depth": 3.9,
+        "overall": 4.1,
+    }
+
+
+@pytest.fixture
+def missing_metrics_scores():
+    """Provide scores with missing metrics for testing."""
+    return {
+        "accuracy": 4.5,
+        "completeness": 3.8,
+        # Missing clarity, depth, overall
+    }
+
+
+@pytest.fixture
+def extra_metrics_scores():
+    """Provide scores with extra metrics for testing."""
+    return {
+        "accuracy": 4.5,
+        "completeness": 3.8,
+        "clarity": 4.2,
+        "depth": 3.9,
+        "overall": 4.1,
+        "extra_metric": 3.0,  # Extra metric
+    }
