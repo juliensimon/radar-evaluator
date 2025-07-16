@@ -5,11 +5,26 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "radar-evaluator"
 version = "0.1.0"
-description = "Radar Evaluator Project"
+description = "A professional, extensible framework for evaluating LLMs across industries using radar charts and custom metrics"
 authors = [
-    {name = "Your Name", email = "your@email.com"}
+    {name = "Julien Simon", email = "julien@example.com"}
 ]
+license = {text = "CC-BY-4.0"}
+readme = "README.md"
 requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Creative Commons License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
 dependencies = [
     "together>=0.2.0",
     "numpy>=1.21.0",
