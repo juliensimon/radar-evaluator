@@ -19,6 +19,15 @@ dependencies = [
     "pathlib2>=2.3.0; python_version < \"3.4\"",
 ]
 
+[project.optional-dependencies.dev]
+black = "*"
+flake8 = "*"
+mypy = "*"
+pytest = "*"
+pytest-cov = "*"
+pandas-stubs = "*"
+types-tqdm = "*"
+
 [tool.black]
 line-length = 88
 target-version = ['py38']
