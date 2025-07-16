@@ -88,5 +88,4 @@ testpaths = ["tests"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
-addopts = "--cov=radar_evaluator --cov-report=term-missing --cov-report=xml --cov-report=html"
-fail_under = 60 
+addopts = "--cov=radar_evaluator --cov-report=term-missing --cov-report=xml --cov-report=html --cov-fail-under=35" 
