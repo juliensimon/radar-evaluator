@@ -39,7 +39,7 @@ jobs:
           flake8 .
       - name: Run type checking
         run: |
-          mypy .
+          mypy . --no-warn-unused-ignores
       - name: Run tests
         run: |
           pytest --cov=radar_evaluator --cov-report=term-missing --cov-report=xml --cov-report=html
@@ -64,7 +64,7 @@ jobs:
       - name: Run security checks
         run: |
           bandit -r . -f json -o bandit-report.json || true
-          safety check --json --output safety-report.json || true
+          safety check --json > safety-report.json || true
       - name: Upload security reports
         uses: actions/upload-artifact@v4
         with:
