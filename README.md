@@ -21,6 +21,10 @@
 
 A professional, extensible framework for evaluating LLMs across industries using radar charts and custom metrics.
 
+![Radar Evaluation Example](AFM-4-5-B-Preview-vs-Llama-3-2-8-B-Instruct-Turbo.png)
+
+*Example radar chart comparing AFM-4-5-B-Preview vs Llama-3-2-8-B-Instruct-Turbo models*
+
 ## Features
 - Multi-model, multi-industry evaluation
 - Customizable metrics and questions
