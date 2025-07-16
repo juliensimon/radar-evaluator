@@ -313,8 +313,12 @@ Then provide your brief justification (2-3 sentences) for your assessment below 
             for metric in metrics:
                 scores_1 = model_1_scores[industry][metric]
                 scores_2 = model_2_scores[industry][metric]
-                model_1_avg[industry][metric] = np.mean(scores_1) if scores_1 else 0.0
-                model_2_avg[industry][metric] = np.mean(scores_2) if scores_2 else 0.0
+                model_1_avg[industry][metric] = (
+                    float(np.mean(scores_1)) if scores_1 else 0.0
+                )
+                model_2_avg[industry][metric] = (
+                    float(np.mean(scores_2)) if scores_2 else 0.0
+                )
 
         # Create radar chart - dynamically size based on number of industries
         num_industries = len(industries)
